@@ -1,14 +1,14 @@
 variable "project" {
-	type = string
+        type = string
 }
 
 variable "env" {
-	type = string
+        type = string
 }
 
 variable "location" {
-	type = string
-	default = "westeurope"
+        type = string
+        default = "westeurope"
 }
 
 variable "vmsize" {
@@ -35,7 +35,7 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "resourceGroup" {
+resource "azurerm_resource_group" "AKS" {
   name     = format("RG_AKS_%s_%s", var.project, var.env)
   location = var.location
 
@@ -44,10 +44,10 @@ resource "azurerm_resource_group" "resourceGroup" {
   }
 }
 
-resource "azurerm_kubernetes_cluster" "K8Scluster" {
+resource "azurerm_kubernetes_cluster" "instance1" {
   name                = format("AKS_%s_%s", var.project, var.env)
-  location            = azurerm_resource_group.resourceGroup.location
-  resource_group_name = azurerm_resource_group.resourceGroup.name
+  location            = var.location
+  resource_group_name = azurerm_resource_group.AKS.name
   dns_prefix          = format("AKS-%s-%s", var.project, var.env)
 
   default_node_pool {
