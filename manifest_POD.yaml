@@ -31,8 +31,9 @@ spec:
           containerPort: 10050
       volumes:
       - name: db-data
-        persistentVolumeClaim:
-          claimName: azure-managed-disk
+#        persistentVolumeClaim:
+#          claimName: azure-managed-disk
+        emptyDir: {}
       securityContext:
         fsGroup: 1997
     

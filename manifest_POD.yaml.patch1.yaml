@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zabbix-proxy-pod
+spec:
+  template:
+    spec:
+      volumes:
+      - name: db-data
+        emptyDir: null
+        persistentVolumeClaim:
+          claimName: azure-managed-disk
+
